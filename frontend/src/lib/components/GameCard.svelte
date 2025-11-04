@@ -17,14 +17,12 @@
         </div>
 
         <div class="card-content-description">
-            <p>{game.description}</p>
-        </div>
-
-        <div class="card-content-rating">
-            <p>{game.rating}</p>
+            <p>{game.description}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
         </div>
     </div>
-
+    <div class="card-ratings">
+        <p>{game.rating}</p>
+    </div>
     <div class="card-price">
         <p>${game.price}</p>
     </div>
@@ -32,7 +30,7 @@
 
 <style>
     .card {
-        background-color: #4d4d4d;
+        background-color: #2a475e;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -44,7 +42,7 @@
         border-radius: 0.4em;
     }
     .card-image {
-        width: 8em;
+        width: 12em;
         height: 80%;
         flex-shrink: 0;
         overflow: hidden;
@@ -68,16 +66,16 @@
     }
 
     .card-content-title {
-        font-size: 1.2em;
+        font-size: 1.8em;
     }
     .card-content-genre {
-        color: #c2c8d1;
-        font-size: 0.6em;
+        color: #c7d5e0;
+        font-size: 1.6em;
         padding: 0.2em 0 0 0;
     }
     .card-content-description {
-        color: #c2c8d1;
-        font-size: 0.6em;
+        color: #c7d5e0;
+        font-size: 1.6em;
         padding: 0.2em 0 0 0;
     }
 
@@ -85,16 +83,18 @@
         overflow-wrap: break-word;
     }
 
-    .card-content-rating {
-        color: #c2c8d1;
-        font-size: 0.6em;
-        padding: 0.2em 0 0 0;
-    }
 
     .card-price {
         display: flex;
         align-items: right;
+        font-size: 1.6em;
         padding: 0 0.5rem 0 0.25rem;
+    }
+    .card-ratings {
+        display: flex;
+        align-items: right;
+        font-size: 1.6em;
+        padding: 0 1rem 0 0.5rem;
     }
 
     p {

@@ -12,25 +12,37 @@
         rating: "testrating",
         price: "testprice",
     };
+    let steamColors = [
+        "#171a21",
+        "#1b2838",
+        "#2a475e",
+        "#66c0f4",
+        "#c7d5e0"];
 
-    let games: SteamGame[] = $state([testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame]);
+    let games: SteamGame[] = $state([testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame]);
     let algorithmInput : string | undefined = $state() ;
     let nameInput : string | undefined = $state() ;
     let dataSizeInput : string | undefined = $state() ;
 </script>
 
-<div class="container">
+<div class="container" style="--deg: 90deg; --gradient-1:#FFFFFFFF; --gradient-2:{steamColors[4]};">
     <div class="container-sidebar">
-        <Sidebar bind:algorithmInput={algorithmInput} bind:nameInput={nameInput} bind:dataSizeInput={dataSizeInput}/>
+        <Sidebar bind:algorithmInput={algorithmInput} bind:nameInput={nameInput} bind:dataSizeInput= {dataSizeInput} colors={steamColors} />
     </div>
     <div class="container-games">
         <div class="container-games-header">
-            <Header algorithmName={algorithmInput} />
+            <Header algorithmName={algorithmInput} colors={steamColors} />
         </div>
         <div class="container-games-list">
-            {#each games as game}
-                <GameCard game={game} />
-            {/each}
+            {#if games.length == 0}
+            <div class="container-games-list-empty">
+                <p>Games will appear here!</p>
+            </div>
+            {:else}
+                {#each games as game}
+                    <GameCard game={game} />
+                {/each}
+            {/if}
         </div>
     </div>
 </div>
@@ -49,7 +61,7 @@
         height: 100vh;
         padding: 0;
         margin: 0;
-        background: #1f1e1e;
+        background: linear-gradient(var(--deg), var(--gradient-1), var(--gradient-2));
         gap: 0;
     }
     .container-sidebar {
@@ -64,7 +76,6 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
-        background: #1f1e1e;
     }
     .container-games-list {
         position: relative;
@@ -74,6 +85,15 @@
         overflow-y: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
+    }
+    .container-games-list-empty {
+        font-family: sans-serif;
+        color: black;
+        font-size: 6em;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .container-games-header {
         position: sticky;
