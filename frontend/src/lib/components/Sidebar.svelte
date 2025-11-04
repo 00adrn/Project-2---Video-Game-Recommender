@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     let algorithms = ["k-Nearest Neighbors", "k-Means Clustering"];
     let games = [""];
     let inputSizes = [100, 1000, 10000, 100000];
@@ -6,7 +6,8 @@
     let {
         algorithmInput = $bindable(),
         nameInput = $bindable(),
-        dataSizeInput = $bindable(),
+        dataSizeInput = $bindable(), 
+        colors = []
     } = $props();
 
     let suggestedGames = $derived(
@@ -18,13 +19,14 @@
     );
 </script>
 
-<div class="container">
+<div class="container"
+    style="--deg: 20deg; --gradient-1:{colors[0]}; --gradient-2:{colors[2]};">
     <div class="container-title">
         <p class="title">Recosteam</p>
     </div>
     <div class="container-border"></div>
 
-    <div class="container-inputarea">
+    <div class="container-inputarea" style="background: #171a21; padding: .4em; border-radius: 0.4em;">
         <div class="container-inputarea-algorithm">
             <p>Please Choose the desired algorithm:</p>
             <select bind:value={algorithmInput}>
@@ -39,27 +41,11 @@
             <input
                 type="text"
                 bind:value={nameInput}
-                placeholder="Choose a game..."
-            />
-            {#if suggestedGames.length > 0}
-                <div class="container-inputarea-game-suggestions">
-                    {#each suggestedGames as game}
-                        <button
-                            type="button"
-                            onclick={() => {
-                                nameInput = game;
-                                suggestedGames = [];
-                            }}
-                        >
-                            {game}
-                        </button>
-                    {/each}
-                </div>
-            {/if}
+                placeholder="Choose a game..."/>
         </div>
 
         <div class="container-inputarea-datasize">
-            <p>Please Choose the desired dataset size:</p>
+            <p>Please Choose the dataset size:</p>
             <select bind:value={dataSizeInput}>
                 {#each inputSizes as size}
                     <option>{size}</option>
@@ -68,22 +54,23 @@
         </div>
     </div>
     <div class="container-border"></div>
+    <div class="container-calculate">
+        <button>Calculate</button>
+    </div>
 </div>
 
 <style>
     .container {
-        background-color: #2b2b2b;
+        background: linear-gradient(var(--deg), var(--gradient-1), var(--gradient-2));
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: em;
         height: 100%;
         width: auto;
         color: #d7dbe0;
         font-family: sans-serif;
         padding: 0.8em;
-        margin: 0 ;
-        border: solid #1f1e1e;
+        margin: 0;
         border-width:0 0.002em 0 0;
     }
     p {
@@ -98,86 +85,89 @@
         margin: 0.4em 0 0 0;
     }
     .container-title {
-        padding: 0 2em;
+        padding: .4em 2em;
         margin: 0;
-        font-size: 2em;
+        font-size: 3em;
         font-weight: bold;
     }
 
     .container-inputarea {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        justify-content: center;
-        gap: 0.8em;
-        width: 100%;
-        font-family: sans-serif;
-        color: #d7dbe0;
-        font-weight: bold;
-    }
-    .container-inputarea-algorithm {
         margin-top: .5em;
         width: 100%;
+        text-align: center;
+        font-size: 1.8em;
+        display: flex;
+        flex-direction: column;
+        gap: 1.4em;
+        width: 100%;
+        font-family: sans-serif;
+        font-weight: bold;
     }
     .container-inputarea-algorithm select {
         height: 2.4em;
         width: 100%;
         text-justify: center;
         box-sizing: border-box;
-        border: none;
-        background: #1f1e1e;
-        color: #d7dbe0;
+        border: .02em solid #171a21;
+        border-radius: .4em;
+        background: #c7d5e0;
+        color: #171a21;
         font-size: 1em;
         outline: none;
     }
-
-    .container-inputarea-game {
-        width: 100%;
+    .container-inputarea-algorithm select:hover {
+        background: white;
     }
-
     .container-inputarea-game input {
         height: 2.4em;
         width: 100%;
-        border: none;
-        background: #1f1e1e;
-        color: #d7dbe0;
+        border: .02em solid #171a21;
+        border-radius: .4em;
+        background: #c7d5e0;
+        color: #171a21;
         text-justify: center;
         font-family: sans-serif;
         font-size: 1em;
         box-sizing: border-box;
         outline: none;
     }
-
-    .container-inputarea-game-suggestions {
-        position: sticky;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        border: solid #c2c8d1;
-        border-width: 0.002em 0 0 0;
-        background: #1f1e1e;
-        border-radius: 0 0 0.8em 0.8em;
-    }
-    .container-inputarea-game-suggestions button {
-        width: 100%;
-        margin: 0;
-        border: none;
-        font-size: 0.8em;
-        color: #d7dbe0;
-        background-color: transparent;
-        text-align: left;
-        padding: 0.4em 0.8em;
+    .container-inputarea-game input:hover {
+        background: white;
     }
     .container-inputarea-datasize select {
         height: 2.4em;
         width: 100%;
         text-justify: center;
         box-sizing: border-box;
-        border: none;
-        background: #1f1e1e;
-        color: #d7dbe0;
+        border: .02em solid #171a21;
+        border-radius: .4em;
+        background: #c7d5e0;
+        color: #171a21;
         font-size: 1em;
         outline: none;
+    }
+    .container-inputarea-datasize select:hover {
+        background: white;
+    }
+    .container-calculate {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+    }
+    .container-calculate button {
+        border-radius: .4em;
+        border: .1em solid #c7d5e0;
+        background: #1b2838;
+        color: #c7d5e0;
+        font-family: sans-serif;
+        font-weight: bold;
+        height: 2.2em;
+        font-size: 1.6em;
+        width: 100%;
+        margin: 1.2em;
+    }
+    .container-calculate button:hover {
+        background: #2a475e;
     }
 </style>
