@@ -1,10 +1,13 @@
 <script>
     let algorithms = ["k-Nearest Neighbors", "k-Means Clustering"];
-    let games = ["Nier", "Silent Hill f", "Bloons Tower Defense 6"];
+    let games = [""];
     let inputSizes = [100, 1000, 10000, 100000];
 
-    let algorithmInput = $state();
-    let nameInput = $state();
+    let {
+        algorithmInput = $bindable(),
+        nameInput = $bindable(),
+        dataSizeInput = $bindable(),
+    } = $props();
 
     let suggestedGames = $derived(
         nameInput
@@ -55,8 +58,13 @@
             {/if}
         </div>
 
-        <div class=container-inputarea-game-datasize>
-            
+        <div class="container-inputarea-datasize">
+            <p>Please Choose the desired dataset size:</p>
+            <select bind:value={dataSizeInput}>
+                {#each inputSizes as size}
+                    <option>{size}</option>
+                {/each}
+            </select>
         </div>
     </div>
     <div class="container-border"></div>
@@ -68,13 +76,15 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-radius: 0 1em 1em 0;
+        padding: em;
         height: 100%;
         width: auto;
         color: #d7dbe0;
         font-family: sans-serif;
         padding: 0.8em;
-        margin: 0.6em 0.6em 0.6em 0;
+        margin: 0 ;
+        border: solid #1f1e1e;
+        border-width:0 0.002em 0 0;
     }
     p {
         margin: 0;
@@ -106,6 +116,7 @@
         font-weight: bold;
     }
     .container-inputarea-algorithm {
+        margin-top: .5em;
         width: 100%;
     }
     .container-inputarea-algorithm select {
@@ -157,5 +168,16 @@
         background-color: transparent;
         text-align: left;
         padding: 0.4em 0.8em;
+    }
+    .container-inputarea-datasize select {
+        height: 2.4em;
+        width: 100%;
+        text-justify: center;
+        box-sizing: border-box;
+        border: none;
+        background: #1f1e1e;
+        color: #d7dbe0;
+        font-size: 1em;
+        outline: none;
     }
 </style>
