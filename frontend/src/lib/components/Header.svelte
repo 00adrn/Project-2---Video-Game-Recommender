@@ -15,16 +15,13 @@
         justify-content: center;
         height: auto;
         width: auto;
-        border-radius: 0 0 .6em .6em;
         color: #d7dbe0;
         font-family: sans-serif;
         font-size: 1.2em;
         font-weight: bold;
-
     }
     p {
         margin: 0;
-        padding: 0;
-    
+        padding: .4em;
     }
 </style>
