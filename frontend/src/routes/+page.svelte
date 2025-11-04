@@ -2,17 +2,36 @@
     import GameCard from "$lib/components/GameCard.svelte";
     import Sidebar from "$lib/components/Sidebar.svelte";
     import Header from "$lib/components/Header.svelte";
+    import type {SteamGame} from '$lib/types.ts';
+
+    let testGame: SteamGame = {
+        imageUrl: "https://cdn.akamai.steamstatic.com/steam/apps/524220/header.jpg?t=1646911723",
+        title: "testgame",
+        genre: "testgenre",
+        description: "testdescription",
+        rating: "testrating",
+        price: "testprice",
+    };
+
+    let games: SteamGame[] = $state([testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame,testGame]);
+    let algorithmInput : string | undefined = $state() ;
+    let nameInput : string | undefined = $state() ;
+    let dataSizeInput : string | undefined = $state() ;
 </script>
 
 <div class="container">
     <div class="container-sidebar">
-        <Sidebar />
+        <Sidebar bind:algorithmInput={algorithmInput} bind:nameInput={nameInput} bind:dataSizeInput={dataSizeInput}/>
     </div>
     <div class="container-games">
         <div class="container-games-header">
-            <Header />
+            <Header algorithmName={algorithmInput} />
         </div>
-        <div class="container-games-list"></div>
+        <div class="container-games-list">
+            {#each games as game}
+                <GameCard game={game} />
+            {/each}
+        </div>
     </div>
 </div>
 
@@ -23,7 +42,6 @@
         box-sizing: border-box;
         overflow: hidden;
     }
-
     .container {
         display: flex;
         flex-direction: row;
@@ -32,8 +50,8 @@
         padding: 0;
         margin: 0;
         background: #1f1e1e;
+        gap: 0;
     }
-
     .container-sidebar {
         display: flex;
         flex-direction: column;
@@ -41,7 +59,6 @@
         justify-content: center;
         height: 100%;
     }
-
     .container-games {
         display: flex;
         flex-direction: column;

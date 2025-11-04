@@ -1,35 +1,32 @@
 <script lang="ts">
-    let {
-        imageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/524220/header.jpg?t=1646911723",
-        title = "Steam Game Title",
-        genre = "Steam Game Genres",
-        rating = "Rating / Score given to the game (i.e. metacritic score)",
-        description = "Description of the game provided by Steam.",
-        price = "99.99",
-    } = $props();
+    import type { SteamGame } from "$lib/types.ts";
+    let { game }: { game: SteamGame } = $props();
 </script>
 
 <div class="card">
+    <div class="card-image">
+        <img src={game.imageUrl} alt={game.title} />
+    </div>
+
     <div class="card-content">
         <div class="card-content-title">
-            <p>{title}</p> 
+            <p>{game.title}</p>
         </div>
         <div class="card-content-genre">
-            <p>{genre}</p>
+            <p>{game.genre}</p>
         </div>
 
         <div class="card-content-description">
-            <p>{description}</p>
+            <p>{game.description}</p>
         </div>
 
         <div class="card-content-rating">
-            <p>{rating}</p>
+            <p>{game.rating}</p>
         </div>
-
     </div>
 
     <div class="card-price">
-        <p>${price}</p>
+        <p>${game.price}</p>
     </div>
 </div>
 
@@ -38,26 +35,36 @@
         background-color: #4d4d4d;
         display: flex;
         flex-direction: row;
-        border-radius: 1em;
         align-items: center;
         justify-content: space-between;
         color: #d7dbe0;
         font-family: sans-serif;
-        margin: .5em;
+        margin: 0.4em 0.4em 0 .4em;
         width: auto;
-        border: solid #c2c8d1;
-        border-width: .1em 0;
+        border-radius: 0.4em;
     }
-    
-
-    .card-content {
+    .card-image {
+        width: 8em;
+        height: 80%;
+        flex-shrink: 0;
+        overflow: hidden;
+        border-radius: 0.2em;
+        margin-left: 0.8em;
+    }
+    .card-image img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .card-content {
+        flex-grow: 1;
+        min-width: 0;
         height: auto;
         display: flex;
         flex-direction: column;
-        padding: .8rem;
-        gap: .2em;
-
+        padding: 0.8rem;
+        gap: 0.2em;
     }
 
     .card-content-title {
@@ -65,29 +72,33 @@
     }
     .card-content-genre {
         color: #c2c8d1;
-        font-size: .6em;
-        padding: .2em 0 0 0;
+        font-size: 0.6em;
+        padding: 0.2em 0 0 0;
     }
     .card-content-description {
         color: #c2c8d1;
-        font-size: .6em;
-        padding: .2em 0 0 0;
+        font-size: 0.6em;
+        padding: 0.2em 0 0 0;
+    }
+
+    .card-content-description p {
+        overflow-wrap: break-word;
     }
 
     .card-content-rating {
         color: #c2c8d1;
-        font-size: .6em;
-        padding: .2em 0 0 0;
+        font-size: 0.6em;
+        padding: 0.2em 0 0 0;
     }
 
     .card-price {
         display: flex;
         align-items: right;
-        padding: 0 .5rem 0 .25rem;
+        padding: 0 0.5rem 0 0.25rem;
     }
 
     p {
         padding: 0;
         margin: 0;
     }
-</style>    
+</style>
