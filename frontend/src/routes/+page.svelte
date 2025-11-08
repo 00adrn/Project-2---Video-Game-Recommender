@@ -2,45 +2,60 @@
     import GameCard from "$lib/components/GameCard.svelte";
     import Sidebar from "$lib/components/Sidebar.svelte";
     import Header from "$lib/components/Header.svelte";
-    import type {SteamGame} from '$lib/types.ts';
+    import type { SteamGame, GameRequest } from "$lib/types.ts";
+    import { api } from "$lib/api";
+    import { onMount } from "svelte";
 
-    let testGame: SteamGame = {
-        imageUrl: "https://cdn.akamai.steamstatic.com/steam/apps/524220/header.jpg?t=1646911723",
-        title: "testgame",
-        genre: "testgenre",
-        description: "testdescription",
-        rating: "testrating",
-        price: "testprice",
-    };
-    let steamColors = [
-        "#171a21",
-        "#1b2838",
-        "#2a475e",
-        "#66c0f4",
-        "#c7d5e0"];
+    let steamColors = ["#171a21", "#1b2838", "#2a475e", "#66c0f4", "#c7d5e0"];
 
-    let games: SteamGame[] = $state([testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame, testGame]);
-    let algorithmInput : string | undefined = $state() ;
-    let nameInput : string | undefined = $state() ;
-    let dataSizeInput : string | undefined = $state() ;
+    let gameNames: string[] = $state([]);
+    let games: SteamGame[] = $state([]);
+    let algorithmInput: string = $state("k-Nearest Neighbors");
+    let nameInput: string = $state("");
+    let dataSizeInput: string = $state("1000000");
+
+    async function sendRequest() {
+        if (nameInput === "" || dataSizeInput === "") return;
+        let request: GameRequest = {
+            gameName: nameInput,
+            algorithm: algorithmInput,
+            dataSize: dataSizeInput,
+            inData: "1",
+        };
+        games = await api.getRecommendations(request);
+    }
+
+    onMount(async () => {
+        gameNames = await api.getGameNames();
+    });
 </script>
 
-<div class="container" style="--deg: 90deg; --gradient-1:#FFFFFFFF; --gradient-2:{steamColors[4]};">
+<div
+    class="container"
+    style="--deg: 90deg; --gradient-1:#FFFFFFFF; --gradient-2:{steamColors[4]};"
+>
     <div class="container-sidebar">
-        <Sidebar bind:algorithmInput={algorithmInput} bind:nameInput={nameInput} bind:dataSizeInput= {dataSizeInput} colors={steamColors} />
+        <Sidebar
+            bind:algorithmInput
+            bind:nameInput
+            bind:dataSizeInput
+            colors={steamColors}
+            {gameNames}
+            buttonFunction={sendRequest}
+        />
     </div>
     <div class="container-games">
         <div class="container-games-header">
             <Header algorithmName={algorithmInput} colors={steamColors} />
         </div>
         <div class="container-games-list">
-            {#if games.length == 0}
-            <div class="container-games-list-empty">
-                <p>Games will appear here!</p>
-            </div>
+            {#if games.length === 0}
+                <div class="container-games-list-empty">
+                    <p>Games will appear here!</p>
+                </div>
             {:else}
                 {#each games as game}
-                    <GameCard game={game} />
+                    <GameCard {game} />
                 {/each}
             {/if}
         </div>
@@ -61,7 +76,11 @@
         height: 100vh;
         padding: 0;
         margin: 0;
-        background: linear-gradient(var(--deg), var(--gradient-1), var(--gradient-2));
+        background: linear-gradient(
+            var(--deg),
+            var(--gradient-1),
+            var(--gradient-2)
+        );
         gap: 0;
     }
     .container-sidebar {
