@@ -4,6 +4,9 @@ export interface SteamGame {
     short_description: string;
     tags: string[];
     metacritic_score: number;
+    positive: number;
+    negative: number;
+    header: string;
 }
 
 export interface GameRequest {

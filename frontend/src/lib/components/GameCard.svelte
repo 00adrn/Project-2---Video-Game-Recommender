@@ -1,11 +1,13 @@
 <script lang="ts">
     import type { SteamGame } from "$lib/types.ts";
     let { game }: { game: SteamGame } = $props();
+
+    function getMetacriticScore ()  {return game.metacritic_score != 0 ? game.metacritic_score : "-"}
 </script>
 
 <div class="card">
     <div class="card-image">
-        <img src="Joe" alt={game.name} />
+        <img src={game.header_image} alt={game.name} />
     </div>
 
     <div class="card-content">
@@ -13,7 +15,11 @@
             <p>{game.name}</p>
         </div>
         <div class="card-content-genre">
-            <p>{game.tags[0]}</p>
+            <div class="card-content-genre-tags">
+                {#each game.tags as tag, i}
+                    <p>{tag}</p>
+                {/each}
+            </div>
         </div>
 
         <div class="card-content-description">
@@ -21,7 +27,7 @@
         </div>
     </div>
     <div class="card-ratings">
-        <p>{game.metacritic_score}</p>
+        <p>{getMetacriticScore()}</p>
     </div>
 </div>
 
@@ -69,6 +75,13 @@
         color: #c7d5e0;
         font-size: .4em;
         padding: 0.2em 0 0 0;
+    }
+    .card-content-genre-tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .8em;
+
     }
     .card-content-description {
         color: #c7d5e0;

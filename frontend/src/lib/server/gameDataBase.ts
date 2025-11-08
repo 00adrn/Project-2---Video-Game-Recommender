@@ -10,9 +10,14 @@ async function loadData() {
     const jsonPath = path.resolve("src/lib/server/data.json");
     const fileContent = await fs.readFile(jsonPath, "utf-8");
     try {
-        const data: Record<string, SteamGame> = JSON.parse(fileContent);
+        const data: Record<string, any> = JSON.parse(fileContent);
         let index = 0;
-        Object.entries(data).forEach(([id, game]) => {
+        
+        Object.values(data).forEach((data) => {
+            const game : SteamGame = {
+                ...data,
+                tags: Object.keys(data.tags || {})
+            }
             gameData.set(index, game)
             index++;
         });
@@ -24,7 +29,7 @@ async function loadData() {
     }
 }
 
-async function getGame(id: number) : Promise<SteamGame> {
+async function getGame(id: number): Promise<SteamGame> {
     return gameData.get(id)!;
 }
 
