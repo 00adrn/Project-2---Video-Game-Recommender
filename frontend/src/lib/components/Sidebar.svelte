@@ -23,9 +23,7 @@
     class="container"
     style="--deg: 20deg; --gradient-1:{colors[0]}; --gradient-2:{colors[2]};"
 >
-    <div class="container-title">
-        <p class="title">Recosteam</p>
-    </div>
+    <img src="/RecoSteam.png" alt="RecoSteam Logo" class="my-image"/>
     <div class="container-border"></div>
 
     <div
@@ -33,7 +31,7 @@
         style="background: #171a21; padding: .4em; border-radius: 0.4em;"
     >
         <div class="container-inputarea-algorithm">
-            <p>Please Choose the desired algorithm:</p>
+            <p>Choose Sorting Algorithm:</p>
             <select bind:value={algorithmInput} >
                 {#each algorithms as algo, i}
                     <option value = {algo} selected>{algo}</option>
@@ -57,7 +55,7 @@
         </div>
 
         <div class="container-inputarea-datasize">
-            <p>Please Choose the dataset size:</p>
+            <p>Number of games to pick from:</p>
             <select bind:value={dataSizeInput}>
                 {#each inputSizes as size}
                         <option value={size} selected>{size}</option>
@@ -98,13 +96,7 @@
         border-width: 0 0 0.002em 0;
         width: 100%;
         padding: 0;
-        margin: 0.4em 0 0 0;
-    }
-    .container-title {
-        padding: 0.4em 2em;
-        margin: 0;
-        font-size: 3em;
-        font-weight: bold;
+        margin: 0 0 0;
     }
 
     .container-inputarea {
@@ -206,6 +198,10 @@
         margin: 1.2em;
     }
     .container-calculate button:hover {
-        background: #2a475e;
+        background: #305d81;
+    }
+    .my-image {
+        width: 225px;
+        height: 225px;
     }
 </style>
