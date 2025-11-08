@@ -1,4 +1,4 @@
-import type { SteamGame, GameRequest } from "./types.ts"
+ import type { SteamGame, GameRequest } from "./types.ts"
 
 async function getRecommendations(game : GameRequest): Promise<SteamGame[]> {
     // const params = new URLSearchParams({

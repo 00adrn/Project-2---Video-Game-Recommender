@@ -8,7 +8,7 @@ console.log("Server: Loading process done.");
 
 
 export const GET: RequestHandler = async ({ url }) => {
-    if (url.searchParams.get("params") == "params") {
+    if (url.searchParams.get("param") == "names") {
         return json(await dataBase.getGameNames());
     }
     let games: SteamGame[] = [];
