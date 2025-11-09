@@ -4,7 +4,7 @@ import re
 
 
 class kNN:
-    def __init__(self, vectorizer, svd, data_man, lemmatizer, stop_words):
+    def __init__(self, vectorizer, svd, lemmatizer, stop_words, data_man):
         """
         Initialize the kNN recommender with pre-trained vectorizer, SVD, and resources.
         """
@@ -69,7 +69,7 @@ class kNN:
             list[int]: Dataset indices of the most similar games.
         """
         # Normalize input
-        input_name_key = input_word.lower().strip()
+        input_name_key = input_word.lower()
 
         # Check if the input game already exists in the dataset
         in_dataset = input_name_key in self.dm.game_indices
