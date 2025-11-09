@@ -1,8 +1,17 @@
 export interface SteamGame {
-    imageUrl : string;
-    title : string;
-    genre : string;
-    rating : string;
-    description : string;
-    price : string;
+    name : string;
+    categories: string[];
+    short_description: string;
+    tags: string[];
+    metacritic_score: number;
+    positive: number;
+    negative: number;
+    header: string;
+}
+
+export interface GameRequest {
+    gameName: string;
+    algorithm: string;
+    inData: string;
+    dataSize: string;
 }

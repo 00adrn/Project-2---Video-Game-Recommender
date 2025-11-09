@@ -1,37 +1,40 @@
 <script lang="ts">
-    let algorithms = ["k-Nearest Neighbors", "k-Means Clustering"];
-    let games = [""];
-    let inputSizes = [100, 1000, 10000, 100000];
+    let algorithms = ["k-Nearest Neighbors", "Heuristic Based Algorithm"];
+    let inputSizes = [100000, 100000, 1000, 100, 10];
 
     let {
         algorithmInput = $bindable(),
         nameInput = $bindable(),
-        dataSizeInput = $bindable(), 
-        colors = []
+        dataSizeInput = $bindable(),
+        colors = [],
+        gameNames = [],
+        buttonFunction,
     } = $props();
 
-    let suggestedGames = $derived(
-        nameInput
-            ? games.filter((game) =>
-                  game.toLowerCase().includes(nameInput.toLowerCase()),
-              )
-            : [],
-    );
+    let filteredGameNames = $derived( nameInput.length > 0 ? gameNames.filter((name) => name.toLowerCase().includes(nameInput.toLowerCase())).slice(0, 10) : [],);
+
+    function setName(index:number) {
+        nameInput = filteredGameNames[index];
+        filteredGameNames = [];
+    }
 </script>
 
-<div class="container"
-    style="--deg: 20deg; --gradient-1:{colors[0]}; --gradient-2:{colors[2]};">
-    <div class="container-title">
-        <p class="title">Recosteam</p>
-    </div>
+<div
+    class="container"
+    style="--deg: 20deg; --gradient-1:{colors[0]}; --gradient-2:{colors[2]};"
+>
+    <img src="/RecoSteam.png" alt="RecoSteam Logo" class="my-image"/>
     <div class="container-border"></div>
 
-    <div class="container-inputarea" style="background: #171a21; padding: .4em; border-radius: 0.4em;">
+    <div
+        class="container-inputarea"
+        style="background: #171a21; padding: .4em; border-radius: 0.4em;"
+    >
         <div class="container-inputarea-algorithm">
-            <p>Please Choose the desired algorithm:</p>
-            <select bind:value={algorithmInput}>
-                {#each algorithms as algo}
-                    <option>{algo}</option>
+            <p>Choose Sorting Algorithm:</p>
+            <select bind:value={algorithmInput} >
+                {#each algorithms as algo, i}
+                    <option value = {algo} selected>{algo}</option>
                 {/each}
             </select>
         </div>
@@ -42,26 +45,37 @@
                 type="text"
                 bind:value={nameInput}
                 placeholder="Choose a game..."/>
+            {#if nameInput.length > 0}
+                <div class="container-inputarea-game-suggestions">
+                {#each filteredGameNames as game, i}
+                    <button onclick={() => setName(i)}>{game}</button>
+                {/each}
+                </div>
+            {/if}
         </div>
 
         <div class="container-inputarea-datasize">
-            <p>Please Choose the dataset size:</p>
+            <p>Number of games to pick from:</p>
             <select bind:value={dataSizeInput}>
                 {#each inputSizes as size}
-                    <option>{size}</option>
+                        <option value={size} selected>{size}</option>
                 {/each}
             </select>
         </div>
     </div>
     <div class="container-border"></div>
     <div class="container-calculate">
-        <button>Calculate</button>
+        <button onclick={buttonFunction}>Calculate</button>
     </div>
 </div>
 
 <style>
     .container {
-        background: linear-gradient(var(--deg), var(--gradient-1), var(--gradient-2));
+        background: linear-gradient(
+            var(--deg),
+            var(--gradient-1),
+            var(--gradient-2)
+        );
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -71,7 +85,7 @@
         font-family: sans-serif;
         padding: 0.8em;
         margin: 0;
-        border-width:0 0.002em 0 0;
+        border-width: 0 0.002em 0 0;
     }
     p {
         margin: 0;
@@ -82,17 +96,11 @@
         border-width: 0 0 0.002em 0;
         width: 100%;
         padding: 0;
-        margin: 0.4em 0 0 0;
-    }
-    .container-title {
-        padding: .4em 2em;
-        margin: 0;
-        font-size: 3em;
-        font-weight: bold;
+        margin: 0 0 0;
     }
 
     .container-inputarea {
-        margin-top: .5em;
+        margin-top: 0.5em;
         width: 100%;
         text-align: center;
         font-size: 1.8em;
@@ -108,8 +116,8 @@
         width: 100%;
         text-justify: center;
         box-sizing: border-box;
-        border: .02em solid #171a21;
-        border-radius: .4em;
+        border: 0.02em solid #171a21;
+        border-radius: 0.4em;
         background: #c7d5e0;
         color: #171a21;
         font-size: 1em;
@@ -121,8 +129,8 @@
     .container-inputarea-game input {
         height: 2.4em;
         width: 100%;
-        border: .02em solid #171a21;
-        border-radius: .4em;
+        border: 0.02em solid #171a21;
+        border-radius: 0.4em;
         background: #c7d5e0;
         color: #171a21;
         text-justify: center;
@@ -134,13 +142,35 @@
     .container-inputarea-game input:hover {
         background: white;
     }
+    .container-inputarea-game-suggestions {
+        display: flex;
+        background: #c7d5e0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 0.02em solid #171a21;
+        border-radius: 0.4em;
+        width:100%;
+    }
+    .container-inputarea-game-suggestions button {
+        border: none;
+        background: none; 
+        width:100%;
+        font-family: sans-serif;
+        color: #171a21;
+        text-justify: center;
+        font-family: sans-serif;
+        height:1.2em;
+        font-size: .8em;
+        overflow:hidden;
+    }
     .container-inputarea-datasize select {
         height: 2.4em;
         width: 100%;
         text-justify: center;
         box-sizing: border-box;
-        border: .02em solid #171a21;
-        border-radius: .4em;
+        border: 0.02em solid #171a21;
+        border-radius: 0.4em;
         background: #c7d5e0;
         color: #171a21;
         font-size: 1em;
@@ -153,11 +183,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width:100%;
+        width: 100%;
     }
     .container-calculate button {
-        border-radius: .4em;
-        border: .1em solid #c7d5e0;
+        border-radius: 0.4em;
+        border: 0.1em solid #c7d5e0;
         background: #1b2838;
         color: #c7d5e0;
         font-family: sans-serif;
@@ -168,6 +198,10 @@
         margin: 1.2em;
     }
     .container-calculate button:hover {
-        background: #2a475e;
+        background: #305d81;
+    }
+    .my-image {
+        width: 225px;
+        height: 225px;
     }
 </style>

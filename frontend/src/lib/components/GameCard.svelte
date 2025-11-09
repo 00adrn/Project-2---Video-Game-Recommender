@@ -1,30 +1,33 @@
 <script lang="ts">
     import type { SteamGame } from "$lib/types.ts";
     let { game }: { game: SteamGame } = $props();
+
+    function getMetacriticScore ()  {return game.metacritic_score != 0 ? game.metacritic_score : "-"}
 </script>
 
 <div class="card">
     <div class="card-image">
-        <img src={game.imageUrl} alt={game.title} />
+        <img src={game.header_image} alt={game.name} />
     </div>
 
     <div class="card-content">
         <div class="card-content-title">
-            <p>{game.title}</p>
+            <p>{game.name}</p>
         </div>
         <div class="card-content-genre">
-            <p>{game.genre}</p>
+            <div class="card-content-genre-tags">
+                {#each game.tags as tag, i}
+                    <p>{tag}</p>
+                {/each}
+            </div>
         </div>
 
         <div class="card-content-description">
-            <p>{game.description}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            <p>{game.short_description}</p>
         </div>
     </div>
     <div class="card-ratings">
-        <p>{game.rating}</p>
-    </div>
-    <div class="card-price">
-        <p>${game.price}</p>
+        <p>{getMetacriticScore()}</p>
     </div>
 </div>
 
@@ -66,37 +69,35 @@
     }
 
     .card-content-title {
-        font-size: 1.8em;
+        font-size: 1.4em;
     }
     .card-content-genre {
         color: #c7d5e0;
-        font-size: 1.6em;
+        font-size: .4em;
         padding: 0.2em 0 0 0;
+    }
+    .card-content-genre-tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: .8em;
+
     }
     .card-content-description {
         color: #c7d5e0;
-        font-size: 1.6em;
+        font-size: .8em;
         padding: 0.2em 0 0 0;
     }
 
     .card-content-description p {
         overflow-wrap: break-word;
     }
-
-
-    .card-price {
-        display: flex;
-        align-items: right;
-        font-size: 1.6em;
-        padding: 0 0.5rem 0 0.25rem;
-    }
     .card-ratings {
         display: flex;
         align-items: right;
-        font-size: 1.6em;
+        font-size: .8em;
         padding: 0 1rem 0 0.5rem;
     }
-
     p {
         padding: 0;
         margin: 0;
