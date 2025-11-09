@@ -5,20 +5,16 @@ Arjun Sujith, Adrian Estevez, and Seth Cruz's submission for Project 2.
 
 The following are the steps to run the program:
 
-- Ensure that you have NodeJS and Python 3 installed on your computer, along with Node Package Manager.
+- Ensure that you have NodeJS and Python 3 installed on your computer, along with Node Package Manager and the numpy, pandas, pyarrow, and joblib installed.
   
 - Open the project in your terminal.
+
+- run the command "python app.py" to intialize bsckend server
   
 - Access the frontend folder : cd frontend
   
-- Run the initialized the server by running the following command in the terminal: npm run start
+- Run and the initialized the server by running the following command in the terminal: npm run dev
   
-	- Note : this will run a series of commands including "npm install", "vite dev", and "python ../app.py". The npm install is to ensure that you have every node module required to run the server while the other two commands will execute the two servers.
-
- - Alternatively, you could run the command "python app.py" to launch the backend and then cd into the frontend folder and run "npm run dev" to run the backend and avoid install the node packages.
-
-
-
 
 
 
