@@ -16,19 +16,19 @@ def recommend_games(knn_obj, dm_obj, input_string, algo_type_flag, sample_size =
 # -----------------------
 dm = DataManager()
 dm.setup(
-    main_data_file='preprocessing/modified_games.json',
-    vector_data_file='preprocessing/games_vectors.parquet'
+    main_data_file='preprocessing/data/modified_games.json',
+    vector_data_file='preprocessing/data/games_vectors.parquet'
 )
 
 # -----------------------
 # Setup kNN Recommender
 # -----------------------
 knn = kNN(
-    vectorizer='preprocessing/tfidf_vectorizer.pkl',
-    svd='preprocessing/svd_model.pkl',
+    vectorizer='preprocessing/data/tfidf_vectorizer.pkl',
+    svd='preprocessing/data/svd_model.pkl',
     data_man=dm,
-    lemmatizer='preprocessing/lemmatizer.pkl',
-    stop_words='preprocessing/stop_words.pkl'
+    lemmatizer='preprocessing/data/lemmatizer.pkl',
+    stop_words='preprocessing/data/stop_words.pkl'
 )
 
 
@@ -52,6 +52,3 @@ if __name__ == "__main__":
 # results = predict(input_string, in_dataset = True)
 
 ##show to user
-
-
-
