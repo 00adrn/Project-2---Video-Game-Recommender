@@ -47,5 +47,3 @@ def heuristic_approach(input_game, num_games, data_man, sample_size = 100000, in
 
     # exclude the input game itself
     return [data_man.game_indices[g.name.lower()] for g in ranked_games if g.name.lower() != input_name][:num_games]
-
-    

@@ -52,6 +52,3 @@ if __name__ == "__main__":
 # results = predict(input_string, in_dataset = True)
 
 ##show to user
-
-
-
