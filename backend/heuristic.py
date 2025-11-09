@@ -15,7 +15,7 @@ def heuristic_score(game, input_partial_score_table, freq_table):
 
     return score
 
-def heuristic_approach(input_game, num_games, data_man, sample_size = 100000):
+def heuristic_approach(input_game, num_games, data_man, sample_size = 100000, in_dataset=True):
     """
     Compare the input game against dataset games using a frequency-based heuristic.
     If two games have equal scores, preserve their original order in the dataset.

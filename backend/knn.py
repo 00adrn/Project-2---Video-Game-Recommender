@@ -55,9 +55,18 @@ class kNN:
             return 0.0
         return np.dot(vec1, vec2) / (mag1 * mag2)
 
+
     def knn_recommend(self, input_word, num_of_games, sample_size=100000):
         """
-        Recommend games similar to the input game/query using cosine similarity.
+        Recommend indices of games similar to the input query using cosine similarity.
+
+        Args:
+            input_word (str): Name or text query of the game.
+            num_of_games (int): Number of recommendations to return.
+            sample_size (int): Number of games to consider (for efficiency).
+
+        Returns:
+            list[int]: Dataset indices of the most similar games.
         """
         # Normalize input
         input_name_key = input_word.lower().strip()
@@ -75,7 +84,7 @@ class kNN:
         # Limit to a subset of the dataset for speed
         X_search = self.dm.vec_data[:sample_size]
 
-        # Compute cosine similarities to all games
+        # Compute cosine similarities for all games
         similarities = []
         for i in range(X_search.shape[0]):
             sim = self.cosine_similarity(query_vector, X_search[i])
@@ -84,15 +93,16 @@ class kNN:
         # Sort by similarity descending
         similarities.sort(key=lambda x: x[0], reverse=True)
 
-        # Collect top recommendations
+        # Collect top recommendation indices
         recommendations = []
         for sim, idx in similarities:
-            game_name = self.dm.games[idx].name
-            # Skip the same game if it exists in dataset
-            if in_dataset and game_name.lower().strip() == input_name_key:
+            # Skip the same game if it’s in the dataset
+            if in_dataset and idx == self.dm.game_indices[input_name_key]:
                 continue
-            recommendations.append(game_name)
+            recommendations.append(idx)
             if len(recommendations) >= num_of_games:
                 break
 
+        # Return the dataset indices of the top recommendations
         return recommendations
+
