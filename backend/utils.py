@@ -126,7 +126,7 @@ class DataManager:
 
         for i, (app_id, raw_game) in enumerate(dataset.items()):
             game = Game(raw_game)
-            name_key = game.name.lower().strip()
+            name_key = game.name.lower()
 
             self.games.append(game)
             self.game_indices[name_key] = i
