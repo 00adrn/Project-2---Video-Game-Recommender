@@ -1,6 +1,30 @@
-<H1> COP3530 - Project 2 </h1>
-This is the template for Project 2 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
+<H1> Recosteam - COP3530 - Project 2 </h1>
+Arjun Sujith, Adrian Estevez, and Seth Cruz's submission for Project 2.
 
+<h2> Running the program </h2>
+
+The following are the steps to run the program:
+
+- Ensure that you have NodeJS and Python 3 installed on your computer, along with Node Package Manager.
+  
+- Open the project in your terminal.
+  
+- Access the frontend folder : cd frontend
+  
+- Run the initialized the server by running the following command in the terminal: npm run start
+  
+	- Note : this will run a series of commands including "npm install", "vite dev", and "python ../app.py". The npm install is to ensure that you have every node module required to run the server while the other two commands will execute the two servers.
+
+ - Alternatively, you could run the command "python app.py" to launch the backend and then cd into the frontend folder and run "npm run dev" to run the backend and avoid install the node packages.
+
+
+
+
+
+
+
+
+   
 <h2> Table of Contents </h2>
 
 - [Documentation and resources on how to use GitHub for Project 2](#documentation-and-resources-on-how-to-use-github-for-project-3)
