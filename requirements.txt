@@ -1,0 +1,6 @@
+numpy
+scikit-learn
+pandas
+nltk
+pyarrow
+joblib

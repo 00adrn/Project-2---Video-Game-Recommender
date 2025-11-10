@@ -141,3 +141,19 @@ class DataManager:
     def load_vectors(self, file):
       self.vec_data = pd.read_parquet(file).values
 
+
+###############################################################################################
+
+import textwrap
+import os
+
+def align_text_with_window(text):
+   ''' this is for the app description to dynamically align based on terminal window size'''
+   try:
+    terminal_width = os.get_terminal_size().columns
+   except OSError:
+    terminal_width = 80
+   
+   wrapped = textwrap.wrap(text, width=terminal_width)
+   return "\n".join(line.ljust(terminal_width) for line in wrapped)
+

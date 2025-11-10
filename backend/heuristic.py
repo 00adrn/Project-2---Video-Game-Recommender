@@ -30,7 +30,7 @@ def heuristic_approach(input_game, num_games, data_man, sample_size = 100000, in
     input_partial_scores = None
     if input_name in data_man.game_indices:
         # game is in dataset
-        input_partial_scores = game_list[data_man.game_indices[input_name]].partial_score_table
+        input_partial_scores = data_man.games[data_man.game_indices[input_name]].partial_score_table
 
     else:
         input_partial_scores = Counter()
