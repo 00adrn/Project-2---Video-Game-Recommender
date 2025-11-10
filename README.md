@@ -3,7 +3,7 @@ Arjun Sujith, Adrian Estevez, and Seth Cruz's submission for Project 2.
 
 <h2> Running the command-line interface</h2>
 
-While our GUI app is not complete, we defer to a command-line app -- essentially a demo of the app functionality. 
+While our GUI app is not complete, we defer to a command-line app -- essentially a full demo of the app functionality. 
 To run it, ensure you have Python 3 installed and open a terminal. Then, follow these steps(replace "name_of_folder" with your preference):
 
 1. Run ***git clone https://github.com/00adrn/Project-2---Video-Game-Recommender name_of_folder*** to clone the repo, if you have git installed. You could also download directly and unzip.
