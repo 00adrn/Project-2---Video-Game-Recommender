@@ -10,9 +10,9 @@ To run it, ensure you have Python 3 installed and open a terminal. Then, follow 
 2. ***cd name_of_folder*** to go to the newly created folder.
 3. Now, there are some options. Either:
    * run  ***python -m pip install -r requirements.txt*** to install python dependencies into your main system interpreter.
-   * create a venv within folder_name by running **python -m venv .venv***, then run ***source .venv/bin/activate***(unix) or ***./.venv/Scripts/activate.bat***  (windows) and then do the above step. In this case, the python dependencies downloaded are localized to the app directory.
+   * create a venv within folder_name by running **python -m venv .venv***, then run ***source .venv/bin/activate***(macOS/linux/unix-based) or ***./.venv/Scripts/activate.bat***  (windows) and then do the above step. In this case, the python dependencies downloaded are localized to the app directory.
    * or, simply run ***python setup.py***. This does both of the above for you, and prompts you to run the appropriate activation script.
-4. Download this folder(or the files): https://drive.google.com/file/d/1jPa-UKDy7Iwt4MhzCMrwFeH1jh7JA2pV/view?usp=drive_link and unzip its two files into the **{system_path}/name_of_folder/preprocessing/data**. Make sure they are taken out of the original downloaded folder and put into that directory. These files are quite large, so the initial download might take some time.
+4. Download this folder(or the files): https://drive.google.com/drive/folders/1IsZEdEkIyactDXV-sGs5R-pO83StQypp?usp=drive_link and unzip its two files into the **{system_path}/name_of_folder/preprocessing/data**. Make sure they are taken out of the original downloaded folder and put into that directory. These files are quite large, so the initial download might take some time.
 5. Finally, making sure you are in **name_of_folder** in the terminal, run: ***python CLI.py***  .
 
 
