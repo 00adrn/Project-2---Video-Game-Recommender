@@ -1,4 +1,6 @@
-preprocessing/data/
+preprocessing/data/games_vectors.parquet
+preprocessing/data/games.json
+preprocessing/data/modified_games.json
 backend/__pycache__/
 preprocessing/dataprep.py
 venv/
