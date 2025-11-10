@@ -4,7 +4,7 @@ Arjun Sujith, Adrian Estevez, and Seth Cruz's submission for Project 2.
 <h2> Running the command-line interface</h2>
 
 While our GUI app is not complete, we defer to a command-line app -- essentially a demo of the app functionality. 
-To run it, ensure you have Python 3 installed and open a terminal. Then, follow these steps(replace name_of_folder with your preference:
+To run it, ensure you have Python 3 installed and open a terminal. Then, follow these steps(replace "name_of_folder" with your preference):
 
 1. Run ***git clone https://github.com/00adrn/Project-2---Video-Game-Recommender name_of_folder*** to clone the repo, if you have git installed. You could also download directly and unzip.
 2. ***cd name_of_folder*** to go to the newly created folder.
@@ -20,7 +20,7 @@ To run it, ensure you have Python 3 installed and open a terminal. Then, follow 
 
 The following are the steps to run the program:
 
-- Ensure that you have NodeJS and Python 3 installed on your computer, along with Node Package Manager and the numpy, pandas, pyarrow, and joblib installed.
+- Ensure that you have NodeJS and Python 3 installed on your computer, along with Node Package Manager and, on the python side, install numpy, pandas, pyarrow, nltk, scikit-learn and joblib.
   
 - Open the project in your terminal.
 
