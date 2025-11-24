@@ -9,21 +9,20 @@ async function loadData() {
     if (loaded) return;
     const jsonPath = path.resolve("src/lib/server/data.json");
     const fileContent = await fs.readFile(jsonPath, "utf-8");
+
     try {
-        const data: Record<string, any> = JSON.parse(fileContent);
-        let index = 0;
-        
-        Object.values(data).forEach((data) => {
-            const game : SteamGame = {
-                ...data,
-                tags: Object.keys(data.tags || {})
-            }
-            gameData.set(index, game)
-            index++;
+        const keyMatches = fileContent.matchAll(/"(\d+)":\s*\{/g);
+        const unorderedKeys = Array.from(keyMatches, match => match[1]);
+
+        const data: Record<string, SteamGame> = JSON.parse(fileContent);
+        unorderedKeys.forEach((key, index) => {
+            gameData.set(index, data[key]);
         });
+
         console.log("Data loaded successfully.")
         console.log("First read game: " + gameData.get(0)!.name)
         loaded = true;
+
     } catch (error) {
         console.log("Error loading data:", error);
     }

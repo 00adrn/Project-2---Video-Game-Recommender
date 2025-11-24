@@ -1,6 +1,6 @@
 <script lang="ts">
     let algorithms = ["k-Nearest Neighbors", "Heuristic Based Algorithm"];
-    let inputSizes = [100000, 100000, 1000, 100, 10];
+    let inputSizes = [100000, 10000, 1000, 100, 10];
 
     let {
         algorithmInput = $bindable(),
@@ -13,7 +13,7 @@
 
     let filteredGameNames = $derived( nameInput.length > 0 ? gameNames.filter((name) => name.toLowerCase().includes(nameInput.toLowerCase())).slice(0, 10) : [],);
 
-    function setName(index:number) {
+    const setName = (index:number) => {
         nameInput = filteredGameNames[index];
         filteredGameNames = [];
     }
@@ -80,7 +80,7 @@
         flex-direction: column;
         align-items: center;
         height: 100%;
-        width: auto;
+        min-width: auto;
         color: #d7dbe0;
         font-family: sans-serif;
         padding: 0.8em;

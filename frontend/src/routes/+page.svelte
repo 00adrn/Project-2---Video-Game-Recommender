@@ -15,13 +15,17 @@
     let dataSizeInput: string = $state("1000000");
 
     async function sendRequest() {
-        if (nameInput === "" || dataSizeInput === "") return;
+        if (nameInput === "" || dataSizeInput === "") 
+            return;
+
+        const algo = algorithmInput == "k-Nearest Neighbors" ? "0" : "1";
+
         let request: GameRequest = {
             gameName: nameInput,
-            algorithm: algorithmInput,
-            dataSize: dataSizeInput,
-            inData: "1",
+            algorithm: algo,
+            dataSize: dataSizeInput
         };
+
         games = await api.getRecommendations(request);
     }
 
@@ -88,6 +92,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width:25%;
         height: 100%;
     }
     .container-games {
@@ -95,6 +100,7 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
+        gap: .5em;
     }
     .container-games-list {
         position: relative;

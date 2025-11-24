@@ -6,12 +6,11 @@ export interface SteamGame {
     metacritic_score: number;
     positive: number;
     negative: number;
-    header: string;
+    header_image: string;
 }
 
 export interface GameRequest {
     gameName: string;
     algorithm: string;
-    inData: string;
     dataSize: string;
 }

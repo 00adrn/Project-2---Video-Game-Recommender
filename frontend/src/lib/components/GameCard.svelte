@@ -2,7 +2,7 @@
     import type { SteamGame } from "$lib/types.ts";
     let { game }: { game: SteamGame } = $props();
 
-    function getMetacriticScore ()  {return game.metacritic_score != 0 ? game.metacritic_score : "-"}
+    const getMetacriticScore = () => {return game.metacritic_score != 0 ? game.metacritic_score : "-"}
 </script>
 
 <div class="card">
